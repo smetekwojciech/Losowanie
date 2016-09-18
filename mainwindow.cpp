@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
-
+// INIT
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -90,6 +90,7 @@ void MainWindow::on_NumberofTeamsBox_currentIndexChanged(int index)
 
     if(index ==1)
     {
+
         ui->GrBox1->clear();
         ui->GrBox2->clear();
         NumberOfTeams=32;
@@ -112,6 +113,7 @@ void MainWindow::on_NumberofTeamsBox_currentIndexChanged(int index)
     }
     else if(index ==2)
     {
+
         ui->GrBox1->clear();
         ui->GrBox2->clear();
         NumberOfTeams=16;
@@ -153,7 +155,7 @@ void MainWindow::on_NumberofTeamsBox_currentIndexChanged(int index)
 
 void MainWindow::AddButtonDisEn()
 {   //Makes "Dodaj" disabled or enabled depending on a use case
-    if(TeamsListed->GetListOfTeams().size()>=(NumberOfTeams)||TeamsListed->GetListOfTeams().size()==0)
+    if(TeamsListed->GetListOfTeams().size()>=(NumberOfTeams)||ui->NumberofTeamsBox->currentIndex()==0)
         {
             ui->Add->setDisabled(true);
         }
