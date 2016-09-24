@@ -79,10 +79,10 @@
    <widget class="QPushButton" name="Draw">
     <property name="geometry">
      <rect>
-      <x>9</x>
+      <x>10</x>
       <y>450</y>
-      <width>310</width>
-      <height>80</height>
+      <width>140</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="text">
@@ -152,6 +152,19 @@
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Drużyny :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Save">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>450</y>
+      <width>140</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zapisz</string>
     </property>
    </widget>
   </widget>

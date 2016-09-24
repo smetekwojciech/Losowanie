@@ -37,11 +37,15 @@ private slots:
 
     void DrawButtonDisEn();
 
+    void SaveButtonDisEn();
+
     void on_Draw_clicked();
 
     void on_GrBox1_currentIndexChanged(int index);
 
     void on_GrBox2_currentIndexChanged(int index);
+
+    void on_Save_clicked();
 
 private:
     Ui::MainWindow *ui;

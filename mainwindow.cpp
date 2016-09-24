@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     GroupsToDraw=NULL;
     AddButtonDisEn();
     DrawButtonDisEn();
+    SaveButtonDisEn();
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +47,7 @@ void MainWindow::on_Add_clicked()
 
     AddButtonDisEn();
     DrawButtonDisEn();
+    SaveButtonDisEn();
 
 
 }
@@ -57,6 +59,7 @@ void MainWindow::on_Clear_clicked()
     QMessageBox::information(this,"Czyszczenie","Wyczyszczono listę drużyn.",QMessageBox::Ok);
     AddButtonDisEn();
     DrawButtonDisEn();
+    SaveButtonDisEn();
 
 
 
@@ -81,6 +84,8 @@ void MainWindow::deleteItem()
     QListWidgetItem *item = (ui->TeamsList->takeItem(ui->TeamsList->currentRow()));
     delete item;
     AddButtonDisEn();
+    DrawButtonDisEn();
+    SaveButtonDisEn();
     //qDebug()<<"Po usunieciu :";
     //TeamsListed->PrintTeams();
 }
@@ -151,6 +156,7 @@ void MainWindow::on_NumberofTeamsBox_currentIndexChanged(int index)
 
     AddButtonDisEn();
     DrawButtonDisEn();
+    SaveButtonDisEn();
 }
 
 void MainWindow::AddButtonDisEn()
@@ -175,7 +181,19 @@ void MainWindow::DrawButtonDisEn()
     else
         {
             ui->Draw->setDisabled(true);
-        }
+    }
+}
+
+void MainWindow::SaveButtonDisEn()
+{
+    if(TeamsListed->GetListOfTeams().size()==16 || TeamsListed->GetListOfTeams().size()==32)
+    {
+        ui->Save->setEnabled(true);
+    }
+    else
+    {
+        ui->Save->setDisabled(true);
+    }
 }
 
 void MainWindow::on_Draw_clicked()
@@ -240,4 +258,28 @@ void MainWindow::on_GrBox2_currentIndexChanged(int index)
         ui->GroupView2->addItems(GroupsToDraw[index].GetGroupTeamsList());
     }
 
+}
+
+void MainWindow::on_Save_clicked()
+{
+    QFile file("E:/QT/Prace/Losowanie/save.txt");
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        QMessageBox *SaveError=new QMessageBox(QMessageBox::Warning,"Błąd zapisu","Wystąpił błąd podczas zapisywania. Spróbuj ponownie.",QMessageBox::Ok,this);
+        SaveError->exec();
+        return;
+    }
+
+    QDataStream out(&file);
+    out.setVersion(QDataStream::Qt_5_7);
+
+    out<<TeamsListed->GetListOfTeams();
+
+     QMessageBox *SaveCompleted=new QMessageBox(QMessageBox::Information,"Zapis","Zapisano plik z drużynami.",QMessageBox::Ok,this);
+     SaveCompleted->exec();
+
+
+
+    file.flush();
+    file.close();
 }
